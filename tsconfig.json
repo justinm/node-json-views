@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "inlineSourceMap": true,
+    "noEmitOnError": true,
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "dist"
+  },
+  "exclude": [
+    "node_modules",
+    "bower_components"
+  ],
+  "include": [
+    "**/*.ts"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "json-serializers",
+  "version": "1.0.0",
+  "description": "A simple DSL for defining JSON views",
+  "main": "dist/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "author": "Justin McCormick <me@justinmccormick.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bluebird": "^3.0.35",
+    "@types/glob": "^5.0.30",
+    "@types/lodash": "^4.14.37",
+    "@types/mocha": "^2.2.32",
+    "@types/node": "^6.0.46",
+    "@types/should": "^8.1.30",
+    "glob": "^7.1.1",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.1.2",
+    "should": "^11.1.1",
+    "typescript": "^2.0.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "lodash": "^4.16.4"
+  }
+}
