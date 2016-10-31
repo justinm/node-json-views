@@ -1,5 +1,6 @@
 node_modules
 atlassian-ide-plugin.xml
+dist/coverage
 *.iml
 *.ipr
 *.iws
