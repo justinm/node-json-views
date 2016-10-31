@@ -10,6 +10,7 @@ function getTestStream() {
 gulp.task('coverage', function() {
   return gulp.src([
     '**/*.js',
+    '!gulpfile.js',
     '!dist/coverage/**',
     '!node_modules/**'
   ])
@@ -29,7 +30,7 @@ gulp.task('test', [ 'coverage' ], function() {
 });
 
 gulp.task('build', function() {
-  var tsProject = ts.createProject('tsconfig.json');
+  var tsProject = ts.createProject('./tsconfig.json');
   var tsResult = tsProject.src()
     .pipe(tsProject());
 

@@ -8,8 +8,10 @@
     "outDir": "dist"
   },
   "exclude": [
+    "dist",
     "node_modules",
-    "bower_components"
+    "bower_components",
+    "**/*.d.ts"
   ],
   "include": [
     "**/*.ts"
