@@ -8,8 +8,14 @@ function getTestStream() {
 }
 
 gulp.task('coverage', function() {
-  getTestStream()
-    .pipe(istanbul())
+  return gulp.src([
+    '**/*.js',
+    '!dist/coverage/**',
+    '!node_modules/**'
+  ])
+    .pipe(istanbul({
+      includeUntested: true
+    }))
     .pipe(istanbul.hookRequire());
 });
 
@@ -28,8 +34,4 @@ gulp.task('build', function() {
     .pipe(tsProject());
 
   tsResult.js.pipe(gulp.dest('dist'));
-});
-
-gulp.task('coverage', function() {
-
 });
