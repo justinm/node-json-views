@@ -2,6 +2,8 @@ json-serializers: a simple DSL for defining JSON views
 ======================================================
 
 What is a json-serializer? A json-serializer allows you to map internal objects to external views.
+
+[![Build Status](https://travis-ci.org/justinm/node-json-serializers.svg?branch=develop)](https://travis-ci.org/justinm/node-json-serializers)
  
 Why use json-serializers
 ------------------------
