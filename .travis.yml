@@ -6,5 +6,8 @@ node_js:
   - "4"
 
 before_script:
-  - npm install -g gulp
-script: gulp build && gulp test
+  - npm install -g gulp codeclimate-test-reporter
+script:
+  - gulp build
+  - gulp test
+  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_KEY codeclimate-test-reporter < dist/coverage/lcov.info
