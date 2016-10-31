@@ -5,6 +5,7 @@ What is a json-serializer? A json-serializer allows you to map internal objects 
 
 [![Build Status](https://travis-ci.org/justinm/node-json-serializers.svg?branch=develop)](https://travis-ci.org/justinm/node-json-serializers)
   [![Code Climate](https://codeclimate.com/github/justinm/node-json-serializers/badges/gpa.svg)](https://codeclimate.com/github/justinm/node-json-serializers)
+  [![Test Coverage](https://codeclimate.com/github/justinm/node-json-serializers/badges/coverage.svg)](https://codeclimate.com/github/justinm/node-json-serializers/coverage)
  
 Why use json-serializers
 ------------------------

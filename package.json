@@ -1,6 +1,6 @@
 {
   "name": "json-serializers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple DSL for defining JSON views",
   "main": "./dist/index.js",
   "directories": {
