@@ -7,8 +7,8 @@ export class Description {
   _disallowed_keys: string[] = [];
   _references: { [key: string]: string } = {};
 
-  allowAll = (allow: boolean) => {
-    this._allow_all = allow;
+  allowAll = () => {
+    this._allow_all = true;
   };
 
   allow = (key: string | string[]) => {

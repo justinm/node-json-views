@@ -30,7 +30,7 @@ describe('Description', () => {
 
     description._allow_all.should.be.false;
 
-    description.allowAll(true);
+    description.allowAll();
 
     description._allow_all.should.be.true;
 
