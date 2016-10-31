@@ -27,5 +27,3 @@ serializer.describe('userAddress', function() {
   this.allow('zip');
 
 });
-
-console.log('Bleh???');
