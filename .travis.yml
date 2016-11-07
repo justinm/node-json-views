@@ -11,3 +11,4 @@ script:
   - gulp build
   - gulp test
   - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_KEY codeclimate-test-reporter < dist/coverage/lcov.info
+  
