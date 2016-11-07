@@ -1,26 +1,26 @@
-import serializer = require('../../index');
+import views = require('../../index');
 
-serializer.describe('userAll', function() {
+views.describe('userAll', function() {
 
   this.allowAll(true);
   this.reference('address', 'userAddress');
 
 });
 
-serializer.describe('userAllowAllDenyOne', function() {
+views.describe('userAllowAllDenyOne', function() {
 
   this.allowAll(true);
   this.deny('address');
 
 });
 
-serializer.describe('userMinimal', function() {
+views.describe('userMinimal', function() {
 
   this.allow([ 'email', 'firstName' ]);
 
 });
 
-serializer.describe('userAddress', function() {
+views.describe('userAddress', function() {
 
   this.allow('city');
   this.allow('state');

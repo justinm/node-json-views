@@ -1,6 +1,6 @@
 {
-  "name": "json-serializers",
-  "version": "1.0.2",
+  "name": "json-views",
+  "version": "1.0.3",
   "description": "A simple DSL for defining JSON views",
   "main": "./dist/index.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/justinm/node-json-serializers.git"
+    "url": "https://github.com/justinm/node-json-views.git"
   },
   "types": "./index.d.ts",
   "author": "Justin McCormick <me@justinmccormick.com>",

@@ -1,16 +1,16 @@
-json-serializers: a simple DSL for defining JSON views
+json-views: a simple DSL for defining JSON views
 ======================================================
 
-What is a json-serializer? A json-serializer allows you to map internal objects to external views.
+What is a json-view? A json-view allows you to map internal objects to external views.
 
-[![Build Status](https://travis-ci.org/justinm/node-json-serializers.svg?branch=develop)](https://travis-ci.org/justinm/node-json-serializers)
-  [![Code Climate](https://codeclimate.com/github/justinm/node-json-serializers/badges/gpa.svg)](https://codeclimate.com/github/justinm/node-json-serializers)
-  [![Test Coverage](https://codeclimate.com/github/justinm/node-json-serializers/badges/coverage.svg)](https://codeclimate.com/github/justinm/node-json-serializers/coverage)
+[![Build Status](https://travis-ci.org/justinm/node-json-views.svg?branch=develop)](https://travis-ci.org/justinm/node-json-views)
+  [![Code Climate](https://codeclimate.com/github/justinm/node-json-views/badges/gpa.svg)](https://codeclimate.com/github/justinm/node-json-views)
+  [![Test Coverage](https://codeclimate.com/github/justinm/node-json-views/badges/coverage.svg)](https://codeclimate.com/github/justinm/node-json-views/coverage)
  
-Why use json-serializers
+Why use json-views
 ------------------------
 
-There are two common reasons for using json-serializers, consistency and security. By using serializers
+There are two common reasons for using json-views, consistency and security. By using views
 we ensure consistency to how objects are presented. Since attributes are whitelisted, this also increases
 security by limiting the chance of accidental internal value exposure.
 
@@ -29,12 +29,12 @@ var user = {
   password: 'password'
 };
 
-serializer.describe('user', function () {
+views.describe('user', function () {
     this.allow([ 'firstName', 'lastName', 'email' ]);
     this.deny('password');
 });
 
-var results = serializer.serialize('user', user);
+var results = views.view('user', user);
 
 results === {
   firstName: 'First',
@@ -60,12 +60,12 @@ var user = {
   password: 'password'
 };
 
-serializer.describe('user', function () {
+views.describe('user', function () {
     this.allowAll();
     this.deny('password');
 });
 
-var results = serializer.serialize('user', user);
+var results = views.view('user', user);
 
 results === {
   firstName: 'First',
@@ -95,17 +95,17 @@ var user = {
   }
 };
 
-serialize.describe('user.address', function() {
+views.describe('user.address', function() {
   this.allow('state');
 });
 
-serializer.describe('user', function() {
+views.describe('user', function() {
     this.allow([ 'firstName', 'lastName', 'email', 'address' ]);
     this.deny('password');
     this.reference('address', 'user.address');
 });
 
-var results = serializer.serialize('user', user);
+var results = views.view('user', user);
 
 results === {
   firstName: 'First',

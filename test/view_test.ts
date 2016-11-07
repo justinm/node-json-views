@@ -1,6 +1,6 @@
 import should = require('should');
 import mocha = require('mocha');
-import serializer = require('../index');
+import views = require('../index');
 import glob = require('glob');
 
 describe('Serializers', () => {
@@ -18,11 +18,11 @@ describe('Serializers', () => {
   };
 
   before(() => {
-    return serializer.loadPath(__dirname + '/serializers/**/*.js');
+    return views.loadPath(__dirname + '/views/**/*.js');
   });
 
   it('should serialize an object with all attributes except in address', () => {
-    var serialized: { [key: string]: any; } = serializer.serialize('userAll', user);
+    var serialized: { [key: string]: any; } = views.view('userAll', user);
 
     serialized.should.have.property('firstName');
     serialized.should.have.property('lastName');
@@ -35,7 +35,7 @@ describe('Serializers', () => {
   });
 
   it('should serialize an object with minimal attributes', () => {
-    var serialized: { [key: string]: any; } = serializer.serialize('userMinimal', user);
+    var serialized: { [key: string]: any; } = views.view('userMinimal', user);
 
     serialized.should.have.property('email');
     serialized.should.have.property('firstName');
@@ -44,7 +44,7 @@ describe('Serializers', () => {
   });
 
   it('should serialize an object with all allowed except for one', () => {
-    var serialized: { [key: string]: any; } = serializer.serialize('userAllowAllDenyOne', user);
+    var serialized: { [key: string]: any; } = views.view('userAllowAllDenyOne', user);
 
     serialized.should.have.property('firstName');
     serialized.should.have.property('lastName');

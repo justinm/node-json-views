@@ -26,10 +26,10 @@ export function describe(name: string, block: Function) {
   objectRegistry[name] = description;
 }
 
-export function serialize(name: string, data: any) {
+export function view(name: string, data: any) {
 
   if (!objectRegistry[name]) {
-    throw new Error('Cannot serialize object, unknown object: ' + name);
+    throw new Error('Cannot view object, unknown object: ' + name);
   }
 
   var data = _.cloneDeep(data);
@@ -52,7 +52,7 @@ export function serialize(name: string, data: any) {
     var refName = description._references[refKey];
 
     if (data[refKey]) {
-      serialized[refKey] = serialize(refName, data[refKey]);
+      serialized[refKey] = view(refName, data[refKey]);
     } else {
       delete serialized[refKey];
     }

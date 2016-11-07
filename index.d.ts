@@ -1,17 +1,17 @@
-declare module "json-serializers" {
-  export = JsonSerializers;
+declare module "json-views" {
+  export = JsonViews;
 }
 
-declare namespace JsonSerializers {
+declare namespace JsonViews {
 
   export function loadPath(path: string): Promise<void>;
   export function describe(name: string, block: Function): void;
-  export function serialize(name: string, data: any): any;
+  export function view(name: string, data: any): any;
 
-  export interface JsonSerializersStatic {
+  export interface JsonViewsStatic {
     loadPath(path: string): Promise<void>;
     describe(name: string, block: Function): void;
-    serialize(name: string, data: any): any;
+    view(name: string, data: any): any;
   }
 
   export interface Description {
