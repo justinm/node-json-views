@@ -10,7 +10,11 @@ export function loadPath(path: string): Promise<void> {
 
     glob(path, function(err: any, files: string[]) {
       files.forEach((file) => {
-        require(file.substr(0, file.length - 3));
+        try {
+          require(file.substr(0, file.length - 3));
+        } catch(e) {
+          reject(e);
+        }
       });
       resolve();
     });
@@ -40,7 +44,7 @@ export function view(name: string, data: any) {
     serialized = data;
   } else {
     for (var key of description._allowed_keys) {
-      serialized[key] = data[key];
+      serialized[key.opts && key.opts.as || key.key] = data[key.key];
     }
   }
 
@@ -49,18 +53,18 @@ export function view(name: string, data: any) {
       return;
     }
 
-    var refName = description._references[refKey];
+    var ref = description._references[refKey];
 
     if (data[refKey]) {
-      serialized[refKey] = view(refName, data[refKey]);
+      serialized[ref.opts && ref.opts.as || refKey] = view(ref.descriptionName, data[refKey]);
     } else {
       delete serialized[refKey];
     }
   }
 
   if (description._disallowed_keys) {
-    for (var key of description._disallowed_keys) {
-      delete serialized[key];
+    for (var disallowedKey of description._disallowed_keys) {
+      delete serialized[disallowedKey];
     }
   }
 

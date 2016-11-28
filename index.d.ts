@@ -1,24 +1,20 @@
-declare module "json-views" {
-  export = JsonViews;
-}
+import * as Promise from 'bluebird';
 
-declare namespace JsonViews {
+declare module "json-views" {
 
   export function loadPath(path: string): Promise<void>;
   export function describe(name: string, block: Function): void;
   export function view(name: string, data: any): any;
 
-  export interface JsonViewsStatic {
-    loadPath(path: string): Promise<void>;
-    describe(name: string, block: Function): void;
-    view(name: string, data: any): any;
+  export interface IAllowOptions {
+    as?: string;
   }
 
   export interface Description {
     allowAll: () => void;
-    allow: (attribute: string | string[]) => void;
+    allow: (attribute: string | string[], opts?: IAllowOptions) => void;
     deny: (attribute: string | string[]) => void;
-    reference: (attribute: string, descriptorName: string) => void;
+    reference: (attribute: string, descriptorName: string, opts?: IAllowOptions) => void;
   }
 
 }

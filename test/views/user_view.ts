@@ -27,3 +27,11 @@ views.describe('userAddress', function() {
   this.allow('zip');
 
 });
+
+views.describe('userRename', function() {
+
+  this.allow([ 'email', 'firstName' ]);
+  this.allow('lastName', { as: 'renamedLastName' });
+  this.allow('address', { as: 'renamedAddress' });
+
+});

@@ -1,23 +1,29 @@
 import _ = require('lodash');
 
+export interface IAllowOptions {
+  as?: string;
+}
+
 export class Description {
 
   _allow_all: boolean = false;
-  _allowed_keys: string[] = [];
+  _allowed_keys: { key: string; opts?: IAllowOptions; }[] = [];
   _disallowed_keys: string[] = [];
-  _references: { [key: string]: string } = {};
+  _references: { [key: string]: { descriptionName: string; opts?: IAllowOptions; } } = {};
 
   allowAll = () => {
     this._allow_all = true;
   };
 
-  allow = (key: string | string[]) => {
-    var keys: string[];
+  allow = (key: string | string[], opts?: IAllowOptions) => {
+    var keys: { key: string; opts?: IAllowOptions; }[];
 
     if (!_.isArray(key)) {
-      keys = [<string>key];
+      keys = [{ key: <string>key, opts: opts }];
     } else {
-      keys = <string[]>key;
+      keys = _.map(<string[]>key, (key) => {
+        return { key: key, opts: opts };
+      });
     }
 
     keys.forEach((key) => {
@@ -39,8 +45,8 @@ export class Description {
     });
   };
 
-  reference = (key: string, name: string) => {
-    this._references[key] = name;
+  reference = (key: string, descriptionName: string, opts?: IAllowOptions) => {
+    this._references[key] = { descriptionName: descriptionName, opts: opts };
   };
 
 }

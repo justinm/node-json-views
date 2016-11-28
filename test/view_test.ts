@@ -52,4 +52,23 @@ describe('Serializers', () => {
     serialized.should.not.have.property('address');
   });
 
+  it('should serialize an object with a renamed key', () => {
+    var serialized: { [key: string]: any; } = views.view('userRename', user);
+
+    serialized.should.not.have.property('lastName');
+    serialized.should.not.have.property('address');
+    serialized.should.have.property('renamedLastName');
+    serialized.should.have.property('renamedAddress');
+
+  });
+
+  it('should throw an error on a non-existent description', () => {
+
+    (function() {
+      views.view('doesNotExist', {});
+    }).should.throw();
+
+  });
+
+
 });

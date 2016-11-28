@@ -9,7 +9,7 @@ describe('Description', () => {
 
     description.allow('test');
 
-    description._allowed_keys[0].should.be.eql('test');
+    description._allowed_keys[0]['key'].should.be.eql('test');
     description._allowed_keys.should.be.Array().with.length(1);
     description._disallowed_keys.should.be.Array().with.length(0);
   });
@@ -21,8 +21,8 @@ describe('Description', () => {
 
     description._allowed_keys.should.be.Array().with.length(2);
     description._disallowed_keys.should.be.Array().with.length(0);
-    description._allowed_keys[0].should.be.eql('test1');
-    description._allowed_keys[1].should.be.eql('test2');
+    description._allowed_keys[0]['key'].should.be.eql('test1');
+    description._allowed_keys[1]['key'].should.be.eql('test2');
   });
 
   it('should allow all keys', () => {
@@ -61,7 +61,7 @@ describe('Description', () => {
 
     description.reference('test', 'test2');
 
-    description._references['test'].should.eql('test2');
+    description._references['test']['descriptionName'].should.eql('test2');
   });
 
 });
