@@ -3,7 +3,7 @@ json-views: a simple DSL for defining JSON views
 
 What is a json-view? A json-view allows you to map internal objects to external views.
 
-[![Build Status](https://travis-ci.org/justinm/node-json-views.svg?branch=develop)](https://travis-ci.org/justinm/node-json-views)
+[![Build Status](https://travis-ci.org/justinm/node-json-views.svg?branch=master)](https://travis-ci.org/justinm/node-json-views)
   [![Code Climate](https://codeclimate.com/github/justinm/node-json-views/badges/gpa.svg)](https://codeclimate.com/github/justinm/node-json-views)
   [![Test Coverage](https://codeclimate.com/github/justinm/node-json-views/badges/coverage.svg)](https://codeclimate.com/github/justinm/node-json-views/coverage)
  
