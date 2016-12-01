@@ -21,3 +21,12 @@ views.describe('userRename', function () {
     this.allow('lastName', { as: 'renamedLastName' });
     this.allow('address', { as: 'renamedAddress' });
 });
+views.describe('userTransform', function () {
+    this.allow(['firstName']);
+    this.transform('fullName', (obj) => {
+        return obj['firstName'] + ' ' + obj['lastName'];
+    });
+    this.transform((obj) => {
+        return obj['firstName'] + ' ' + obj['lastName'];
+    }, { as: 'fullNameAs' });
+});

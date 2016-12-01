@@ -6,6 +6,10 @@ declare module "json-views" {
   export function describe(name: string, block: Function): void;
   export function view(name: string, data: any): any;
 
+  export interface ITransform {
+    (obj: any): any;
+  }
+
   export interface IAllowOptions {
     as?: string;
   }
@@ -15,6 +19,7 @@ declare module "json-views" {
     allow: (attribute: string | string[], opts?: IAllowOptions) => void;
     deny: (attribute: string | string[]) => void;
     reference: (attribute: string, descriptorName: string, opts?: IAllowOptions) => void;
+    transform: (transformer: string | ITransform, opts: ITransform | IAllowOptions) => any;
   }
 
 }

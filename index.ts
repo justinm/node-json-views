@@ -44,7 +44,7 @@ export function view(name: string, data: any) {
     serialized = data;
   } else {
     for (var key of description._allowed_keys) {
-      serialized[key.opts && key.opts.as || key.key] = data[key.key];
+      serialized[key.as || key.key] = data[key.key];
     }
   }
 
@@ -52,15 +52,18 @@ export function view(name: string, data: any) {
     if (!description._references.hasOwnProperty(refKey)) {
       return;
     }
-
     var ref = description._references[refKey];
 
     if (data[refKey]) {
-      serialized[ref.opts && ref.opts.as || refKey] = view(ref.descriptionName, data[refKey]);
+      serialized[ref.as || refKey] = view(ref.descriptionName, data[refKey]);
     } else {
       delete serialized[refKey];
     }
   }
+
+  description._transformations.forEach((ref) => {
+    serialized[ref.as || refKey] = ref.transformer(data);
+  });
 
   if (description._disallowed_keys) {
     for (var disallowedKey of description._disallowed_keys) {

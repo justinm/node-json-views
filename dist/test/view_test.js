@@ -52,4 +52,10 @@ describe('Serializers', () => {
             views.view('doesNotExist', {});
         }).should.throw();
     });
+    it('should serialize an object with transformed keys', () => {
+        var serialized = views.view('userTransform', user);
+        serialized.should.have.property('fullName');
+        serialized['fullName'].should.eql(user.firstName + ' ' + user.lastName);
+        serialized['fullNameAs'].should.eql(user.firstName + ' ' + user.lastName);
+    });
 });

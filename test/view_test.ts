@@ -59,7 +59,6 @@ describe('Serializers', () => {
     serialized.should.not.have.property('address');
     serialized.should.have.property('renamedLastName');
     serialized.should.have.property('renamedAddress');
-
   });
 
   it('should throw an error on a non-existent description', () => {
@@ -70,5 +69,13 @@ describe('Serializers', () => {
 
   });
 
+  it('should serialize an object with transformed keys', () => {
+    var serialized: { [key: string]: any; } = views.view('userTransform', user);
+
+    serialized.should.have.property('fullName');
+
+    serialized['fullName'].should.eql(user.firstName + ' ' + user.lastName);
+    serialized['fullNameAs'].should.eql(user.firstName + ' ' + user.lastName);
+  });
 
 });

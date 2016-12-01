@@ -35,3 +35,17 @@ views.describe('userRename', function() {
   this.allow('address', { as: 'renamedAddress' });
 
 });
+
+views.describe('userTransform', function() {
+
+  this.allow([ 'firstName' ]);
+
+  this.transform('fullName', (obj: { [key: string]: any }) => {
+    return obj['firstName'] + ' ' + obj['lastName'];
+  });
+
+  this.transform((obj: { [key: string]: any }) => {
+    return obj['firstName'] + ' ' + obj['lastName'];
+  }, { as: 'fullNameAs' })
+
+});

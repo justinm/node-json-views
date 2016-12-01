@@ -57,13 +57,36 @@ var user = {
   firstName: 'First',
   lastName: 'Last',
   email: 'test@example.com',
-  password: 'password'
+  password: 'password',
+  address: {
+    street: '1234 Example',
+    city: 'Indianapolis',
+    state: 'IN'
+  }
 };
 
-views.describe('user', function () {
-    this.allowAll();
-    this.deny('password');
+views.describe('user.address', function() {
+  this.allow('state');
 });
+
+views.describe('user', function() {
+  this.allow([ 'firstName', 'lastName', 'email' ]);
+  this.deny('password');
+  this.reference('address', 'user.address');
+  this.transform(function(obj) { return obj.firstName + ' ' + obj.lastName }, { as: 'fullName' });
+  this.transform('fullName', function(obj) { return obj.firstName + ' ' + obj.lastName });
+});
+
+var results = views.view('user', user);
+
+results === {
+  firstName: 'First',
+  lastName: 'Last',
+  email: 'test@example.com',
+  address: {
+    state: 'IN'
+  }
+}
 
 var results = views.view('user', user);
 
@@ -88,11 +111,6 @@ var user = {
   lastName: 'Last',
   email: 'test@example.com',
   password: 'password',
-  address: {
-    street: '1234 Example',
-    city: 'Indianapolis',
-    state: 'IN'
-  }
 };
 
 views.describe('user.address', function() {
@@ -117,3 +135,7 @@ results === {
 }
 
 ```
+
+Renaming Keys
+-------------
+

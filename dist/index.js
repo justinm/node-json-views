@@ -38,7 +38,7 @@ function view(name, data) {
     }
     else {
         for (var key of description._allowed_keys) {
-            serialized[key.opts && key.opts.as || key.key] = data[key.key];
+            serialized[key.as || key.key] = data[key.key];
         }
     }
     for (var refKey in description._references) {
@@ -47,12 +47,15 @@ function view(name, data) {
         }
         var ref = description._references[refKey];
         if (data[refKey]) {
-            serialized[ref.opts && ref.opts.as || refKey] = view(ref.descriptionName, data[refKey]);
+            serialized[ref.as || refKey] = view(ref.descriptionName, data[refKey]);
         }
         else {
             delete serialized[refKey];
         }
     }
+    description._transformations.forEach((ref) => {
+        serialized[ref.as || refKey] = ref.transformer(data);
+    });
     if (description._disallowed_keys) {
         for (var disallowedKey of description._disallowed_keys) {
             delete serialized[disallowedKey];
