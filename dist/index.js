@@ -26,13 +26,9 @@ function describe(name, block) {
     objectRegistry[name] = description;
 }
 exports.describe = describe;
-function view(name, data) {
-    if (!objectRegistry[name]) {
-        throw new Error('Cannot view object, unknown object: ' + name);
-    }
-    var data = _.cloneDeep(data);
-    var serialized = {};
+function serialize(name, data) {
     var description = objectRegistry[name];
+    var serialized = {};
     if (description._allow_all) {
         serialized = data;
     }
@@ -62,5 +58,19 @@ function view(name, data) {
         }
     }
     return serialized;
+}
+exports.serialize = serialize;
+function view(name, data) {
+    if (!objectRegistry[name]) {
+        throw new Error('Cannot view object, unknown object: ' + name);
+    }
+    var data = _.cloneDeep(data);
+    if (_.isArray(data)) {
+        data = data.map((d) => serialize(name, d));
+    }
+    else {
+        data = serialize(name, data);
+    }
+    return data;
 }
 exports.view = view;

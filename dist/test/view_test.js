@@ -58,4 +58,16 @@ describe('Serializers', () => {
         serialized['fullName'].should.eql(user.firstName + ' ' + user.lastName);
         serialized['fullNameAs'].should.eql(user.firstName + ' ' + user.lastName);
     });
+    it('should serialize an array of objects', () => {
+        var serialized = views.view('userAll', [user]);
+        serialized.should.be.an.Array();
+        serialized[0].should.have.property('firstName');
+        serialized[0].should.have.property('lastName');
+        serialized[0].should.have.property('address');
+        serialized[0].should.have.property('email');
+        serialized[0]['address'].should.not.have.property('street');
+        serialized[0]['address'].should.have.property('city');
+        serialized[0]['address'].should.have.property('state');
+        serialized[0]['address'].should.have.property('zip');
+    });
 });

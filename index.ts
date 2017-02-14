@@ -30,15 +30,9 @@ export function describe(name: string, block: (dsc: Description) => void) {
   objectRegistry[name] = description;
 }
 
-export function view(name: string, data: any) {
-
-  if (!objectRegistry[name]) {
-    throw new Error('Cannot view object, unknown object: ' + name);
-  }
-
-  var data = _.cloneDeep(data);
-  var serialized: any = {};
+export function serialize(name: string, data: any) {
   var description = objectRegistry[name];
+  var serialized: any = {};
 
   if (description._allow_all) {
     serialized = data;
@@ -72,4 +66,21 @@ export function view(name: string, data: any) {
   }
 
   return serialized;
+}
+
+export function view(name: string, data: any) {
+
+  if (!objectRegistry[name]) {
+    throw new Error('Cannot view object, unknown object: ' + name);
+  }
+
+  var data = _.cloneDeep(data);
+
+  if (_.isArray(data)) {
+    data = data.map((d) => serialize(name, d));
+  } else {
+    data = serialize(name, data);
+  }
+
+  return data;
 }
