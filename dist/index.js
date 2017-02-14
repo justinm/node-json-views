@@ -22,7 +22,7 @@ function loadPath(path) {
 exports.loadPath = loadPath;
 function describe(name, block) {
     var description = new description_1.Description();
-    block.call(description);
+    block.call(this, description);
     objectRegistry[name] = description;
 }
 exports.describe = describe;

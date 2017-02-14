@@ -3,7 +3,7 @@ import * as Promise from 'bluebird';
 declare module "json-views" {
 
   export function loadPath(path: string): Promise<void>;
-  export function describe(name: string, block: Function): void;
+  export function describe(name: string, block: (desc: Description) => void): void;
   export function view(name: string, data: any): any;
 
   export interface ITransform {

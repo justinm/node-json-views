@@ -1,32 +1,32 @@
 "use strict";
 const views = require('../../index');
-views.describe('userAll', function () {
-    this.allowAll(true);
-    this.reference('address', 'userAddress');
+views.describe('userAll', function (desc) {
+    desc.allowAll();
+    desc.reference('address', 'userAddress');
 });
-views.describe('userAllowAllDenyOne', function () {
-    this.allowAll(true);
-    this.deny('address');
+views.describe('userAllowAllDenyOne', function (desc) {
+    desc.allowAll();
+    desc.deny('address');
 });
-views.describe('userMinimal', function () {
-    this.allow(['email', 'firstName']);
+views.describe('userMinimal', function (desc) {
+    desc.allow(['email', 'firstName']);
 });
-views.describe('userAddress', function () {
-    this.allow('city');
-    this.allow('state');
-    this.allow('zip');
+views.describe('userAddress', function (desc) {
+    desc.allow('city');
+    desc.allow('state');
+    desc.allow('zip');
 });
-views.describe('userRename', function () {
-    this.allow(['email', 'firstName']);
-    this.allow('lastName', { as: 'renamedLastName' });
-    this.allow('address', { as: 'renamedAddress' });
+views.describe('userRename', function (desc) {
+    desc.allow(['email', 'firstName']);
+    desc.allow('lastName', { as: 'renamedLastName' });
+    desc.allow('address', { as: 'renamedAddress' });
 });
-views.describe('userTransform', function () {
-    this.allow(['firstName']);
-    this.transform('fullName', (obj) => {
+views.describe('userTransform', function (desc) {
+    desc.allow(['firstName']);
+    desc.transform('fullName', (obj) => {
         return obj['firstName'] + ' ' + obj['lastName'];
     });
-    this.transform((obj) => {
+    desc.transform((obj) => {
         return obj['firstName'] + ' ' + obj['lastName'];
     }, { as: 'fullNameAs' });
 });

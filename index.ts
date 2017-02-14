@@ -22,10 +22,10 @@ export function loadPath(path: string): Promise<void> {
   });
 }
 
-export function describe(name: string, block: Function) {
+export function describe(name: string, block: (dsc: Description) => void) {
   var description = new Description();
 
-  block.call(description);
+  block.call(this, description);
 
   objectRegistry[name] = description;
 }
