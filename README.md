@@ -29,9 +29,9 @@ var user = {
   password: 'password'
 };
 
-views.describe('user', function () {
-    this.allow([ 'firstName', 'lastName', 'email' ]);
-    this.deny('password');
+views.describe('user', function (desc) {
+    desc.allow([ 'firstName', 'lastName', 'email' ]);
+    desc.deny('password');
 });
 
 var results = views.view('user', user);
@@ -49,7 +49,7 @@ Allowing and Denying
 --------------------
 
 JSON serializers works as a combination whitelist/blacklist for object attributes where attributes must first 
- be this.allow()'ed. this.deny() will always take priority in cases where an attribute is both allowed and denied.
+ be desc.allow()'ed. desc.deny() will always take priority in cases where an attribute is both allowed and denied.
   
 ```javascript
 
@@ -65,16 +65,16 @@ var user = {
   }
 };
 
-views.describe('user.address', function() {
-  this.allow('state');
+views.describe('user.address', function(desc) {
+  desc.allow('state');
 });
 
-views.describe('user', function() {
-  this.allow([ 'firstName', 'lastName', 'email' ]);
-  this.deny('password');
-  this.reference('address', 'user.address');
-  this.transform(function(obj) { return obj.firstName + ' ' + obj.lastName }, { as: 'fullName' });
-  this.transform('fullName', function(obj) { return obj.firstName + ' ' + obj.lastName });
+views.describe('user', function(desc) {
+  desc.allow([ 'firstName', 'lastName', 'email' ]);
+  desc.deny('password');
+  desc.reference('address', 'user.address');
+  desc.transform(function(obj) { return obj.firstName + ' ' + obj.lastName }, { as: 'fullName' });
+  desc.transform('fullName', function(obj) { return obj.firstName + ' ' + obj.lastName });
 });
 
 var results = views.view('user', user);
@@ -102,7 +102,7 @@ results === {
 Nested Objects
 --------------
 
-Serializers can also be nested using this.reference().
+Views can also be nested using desc.reference().
 
 ```javascript
 
@@ -113,14 +113,14 @@ var user = {
   password: 'password',
 };
 
-views.describe('user.address', function() {
-  this.allow('state');
+views.describe('user.address', function(desc) {
+  desc.allow('state');
 });
 
-views.describe('user', function() {
-    this.allow([ 'firstName', 'lastName', 'email', 'address' ]);
-    this.deny('password');
-    this.reference('address', 'user.address');
+views.describe('user', function(desc) {
+  desc.allow([ 'firstName', 'lastName', 'email', 'address' ]);
+  desc.deny('password');
+  desc.reference('address', 'user.address');
 });
 
 var results = views.view('user', user);
@@ -135,7 +135,4 @@ results === {
 }
 
 ```
-
-Renaming Keys
--------------
 
